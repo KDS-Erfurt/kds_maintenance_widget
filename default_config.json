@@ -1,0 +1,17 @@
+{
+  "height": 50,
+  "background_color": "rgb(255, 80, 80)",
+  "font_color": "rgb(255, 255, 255)",
+  "font_size": "18pt",
+  "font_family": "Courier",
+  "frame_interval": 50,
+  "steps_per_frame": 5,
+  "opacity": 0.7,
+  "click_through": true,
+  "always_on_top": true,
+  "space_between_messages": 100,
+  "seperator": "+++",
+  "messages_file_postfix": ".txt",
+  "messages_file_dir": "messages",
+  "load_messages_interval": 1000
+}
