@@ -1,0 +1,17 @@
+{
+  "height": 25,
+  "background_color": "rgba(255, 0, 0)",
+  "opacity": 0.5,
+  "click_through": false,
+  "always_on_top": true,
+  "messages": [
+    {
+      "text": "Das ist ein Test.",
+      "speed": 3
+    },
+    {
+      "text": "Sind wir jetzt fertig?",
+      "speed": 1
+    }
+  ]
+}
