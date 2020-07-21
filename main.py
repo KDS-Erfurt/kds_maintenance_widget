@@ -1,14 +1,14 @@
 import json
 import os
 import shutil
-
+import psutil as psutil
 from PyQt5 import QtCore
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMessageBox
 import sys
 
 name = "KDS-Maintenance Widget"
-version = "v0.1"
+version = "v0.2"
 
 default_config = "default_config.json"
 
@@ -45,6 +45,8 @@ class Window(QWidget):
 
         if not os.path.isdir(self.config["messages_file_dir"]):
             self.show_message_dialog("error", "Das Nachrichtenverzeichniss wurde nicht gefunden.", sys.exit)
+
+        self.username = os.environ["USERDOMAIN"] + "\\" + os.environ["USERNAME"]
 
         screen_resolution = app.desktop().screenGeometry()
         self.setGeometry(0, 0, screen_resolution.width(), self.config["height"])
@@ -84,7 +86,21 @@ class Window(QWidget):
         self.message_load_timer.timeout.connect(self.load_messages)
         self.message_load_timer.start(self.config["load_messages_interval"])
 
+        self.close_Processes_timer = QTimer(self)
+        self.close_Processes_timer.timeout.connect(self.close_Processes)
+        self.close_Processes_timer.start(self.config["close_Processes_interval"])
+
+
         self.next_frame()
+
+
+    def close_Processes(self):
+        for process in psutil.process_iter(['name', 'username']):
+                for close_process in self.config["close_Processes"]:
+                    if close_process.lower() == process.name().lower():
+                        if self.username == process.username():
+                            return
+        sys.exit(0)
 
     def load_messages(self):
         if os.path.exists(self.config["messages_file_dir"]):

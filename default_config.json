@@ -13,5 +13,10 @@
   "seperator": "+++",
   "messages_file_postfix": ".txt",
   "messages_file_dir": "messages",
-  "load_messages_interval": 1000
+  "load_messages_interval": 1000,
+  "close_Processes_interval": 10000,
+  "close_Processes": [
+    "notepad.exe",
+    "Calculator.exe"
+  ]
 }
