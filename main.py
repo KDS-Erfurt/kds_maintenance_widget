@@ -86,9 +86,10 @@ class Window(QWidget):
         self.message_load_timer.timeout.connect(self.load_messages)
         self.message_load_timer.start(self.config["load_messages_interval"])
 
-        self.close_Processes_timer = QTimer(self)
-        self.close_Processes_timer.timeout.connect(self.close_Processes)
-        self.close_Processes_timer.start(self.config["close_Processes_interval"])
+        if len(self.config["close_Processes"]) > 0:
+            self.close_Processes_timer = QTimer(self)
+            self.close_Processes_timer.timeout.connect(self.close_Processes)
+            self.close_Processes_timer.start(self.config["close_Processes_interval"])
 
 
         self.next_frame()
@@ -96,10 +97,10 @@ class Window(QWidget):
 
     def close_Processes(self):
         for process in psutil.process_iter(['name', 'username']):
-                for close_process in self.config["close_Processes"]:
-                    if close_process.lower() == process.name().lower():
-                        if self.username == process.username():
-                            return
+            for close_process in self.config["close_Processes"]:
+                if close_process.lower() == process.name().lower():
+                    if self.username == process.username():
+                        return
         sys.exit(0)
 
     def load_messages(self):
