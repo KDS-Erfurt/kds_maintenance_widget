@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMessageBox
 import sys
 
 name = "KDS-Maintenance Widget"
-version = "v0.2"
+version = "v0.2.1"
 
 default_config = "default_config.json"
 
